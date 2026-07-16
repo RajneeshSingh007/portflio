@@ -1,26 +1,336 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --sky: #efe8ff;
+  --sky-deep: #d4c4f5;
+  --night: #2a1f55;
+  --night-soft: #3d2f72;
+  --ink: #2a1f55;
+  --ink-soft: #6b5f92;
+  --sakura: #ff6ba8;
+  --sakura-bright: #ff8fbf;
+  --ice: #6eb6ff;
+  --ice-bright: #9dceff;
+  --lilac: #a78bfa;
+  --peach: #ffc4b0;
+  --paper: #fff7fb;
+  --panel: rgba(255, 255, 255, 0.78);
+  --background: var(--sky);
+  --foreground: var(--ink);
 }
 
 @theme inline {
+  --color-sky: var(--sky);
+  --color-sky-deep: var(--sky-deep);
+  --color-night: var(--night);
+  --color-night-soft: var(--night-soft);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-sakura: var(--sakura);
+  --color-sakura-bright: var(--sakura-bright);
+  --color-ice: var(--ice);
+  --color-ice-bright: var(--ice-bright);
+  --color-lilac: var(--lilac);
+  --color-peach: var(--peach);
+  --color-paper: var(--paper);
+  --color-panel: var(--panel);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-zen);
+  --font-sans: var(--font-mplus);
+  --font-mono: var(--font-plex-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .petal,
+  .sparkle,
+  .float-orb {
+    animation: none !important;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  color: var(--ink);
+  font-family: var(--font-mplus), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 15% 0%, #ffd6ea 0%, transparent 50%),
+    radial-gradient(ellipse 70% 45% at 95% 8%, #c9dcff 0%, transparent 48%),
+    radial-gradient(ellipse 55% 40% at 50% 100%, #e4d4ff 0%, transparent 55%),
+    linear-gradient(180deg, #efe8ff 0%, #fff7fb 45%, #e8f0ff 100%);
+  background-attachment: fixed;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--sakura) 45%, transparent);
+  color: var(--night);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 200;
+  border-radius: 999px;
+  background: var(--sakura);
+  color: white;
+  padding: 0.6rem 1rem;
+  font-weight: 700;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.shell {
+  margin-inline: auto;
+  width: min(1100px, calc(100% - 2rem));
+}
+
+.display {
+  font-family: var(--font-zen), var(--font-mplus), sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.jp {
+  font-family: var(--font-zen), sans-serif;
+  letter-spacing: 0.08em;
+}
+
+.mono {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.speech {
+  position: relative;
+  background: var(--panel);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid color-mix(in srgb, var(--sakura) 45%, white);
+  border-radius: 1.5rem 1.5rem 1.5rem 0.35rem;
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--lilac) 18%, transparent);
+}
+
+.manga-panel {
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid color-mix(in srgb, var(--lilac) 40%, white);
+  border-radius: 1.25rem;
+  box-shadow: 0 14px 36px color-mix(in srgb, var(--sakura) 16%, transparent);
+  overflow: hidden;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid color-mix(in srgb, var(--lilac) 35%, white);
+  border-radius: 999px;
+  background: white;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.btn-anime {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.9rem 1.5rem;
+  font-weight: 800;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--sakura) 28%, transparent);
+}
+
+.btn-anime:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--sakura) 35%, transparent);
+}
+
+.btn-anime:active {
+  transform: translateY(0);
+}
+
+.btn-sakura {
+  background: linear-gradient(135deg, var(--sakura), #ff4f96);
+  color: white;
+}
+
+.btn-ice {
+  background: linear-gradient(135deg, var(--ice), #4a9fff);
+  color: white;
+}
+
+.btn-ghost-anime {
+  background: white;
+  color: var(--night);
+}
+
+.focus-ring:focus-visible {
+  outline: 3px solid var(--sakura);
+  outline-offset: 3px;
+}
+
+.petal {
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  border-radius: 80% 0 80% 0;
+  background: linear-gradient(135deg, #ffb3d4, #ff6ba8);
+  opacity: 0.75;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 20px)) rotate(420deg);
+    opacity: 0;
+  }
+}
+
+.float-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: float 7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: white;
+  clip-path: polygon(50% 0%, 65% 35%, 100% 50%, 65% 65%, 50% 100%, 35% 65%, 0% 50%, 35% 35%);
+  animation: twinkle 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.6) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2) rotate(20deg);
+  }
+}
+
+.speed-lines {
+  background-image: repeating-linear-gradient(
+    -18deg,
+    transparent,
+    transparent 8px,
+    color-mix(in srgb, var(--night) 4%, transparent) 8px,
+    color-mix(in srgb, var(--night) 4%, transparent) 9px
+  );
+}
+
+.marquee-anime {
+  display: flex;
+  overflow: hidden;
+  border-block: 1px solid color-mix(in srgb, var(--sakura) 30%, white);
+  background: linear-gradient(90deg, #ffe6f2, #e8ecff, #e6f3ff);
+}
+
+.marquee-anime-track {
+  display: flex;
+  min-width: max-content;
+  animation: slide 30s linear infinite;
+}
+
+.marquee-anime-track span {
+  padding: 0.75rem 1.4rem;
+  font-weight: 800;
+  white-space: nowrap;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+}
+
+@keyframes slide {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-anime-track {
+    animation: none;
+  }
+}
+
+.character-float {
+  animation: characterBob 4.5s ease-in-out infinite;
+}
+
+@keyframes characterBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .character-float {
+    animation: none;
+  }
 }
