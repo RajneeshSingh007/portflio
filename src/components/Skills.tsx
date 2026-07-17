@@ -7,34 +7,42 @@ export function Skills() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="skills" className="relative py-20 sm:py-28">
+    <section id="skills" className="relative py-24 sm:py-32">
       <div className="shell">
         <motion.div
+          className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between"
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-sm font-bold text-sakura">Skills</p>
-          <h2 className="display mt-2 text-4xl font-black sm:text-5xl">
-            What I reach for
-          </h2>
+          <div>
+            <p className="section-label">Skills</p>
+            <h2 className="display mt-4 text-4xl font-bold text-ink sm:text-5xl">
+              Technical toolkit
+            </h2>
+          </div>
+          <p className="max-w-sm text-ink-muted">
+            The stack I use to design, build, and ship mobile apps in production.
+          </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-14 grid gap-4 sm:grid-cols-2">
           {skillGroups.map((group, i) => (
             <motion.div
               key={group.title}
-              className="manga-panel p-5"
-              initial={reduce ? false : { opacity: 0, y: 20 }}
+              className="surface overflow-hidden p-6 sm:p-7"
+              initial={reduce ? false : { opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: reduce ? 0 : i * 0.05 }}
-              whileHover={reduce ? undefined : { y: -4 }}
             >
-              <h3 className="text-sm font-bold text-sakura">{group.title}</h3>
-              <ul className="mt-4 flex flex-wrap gap-2">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="display text-xl font-bold text-ink">{group.title}</h3>
+                <span className="font-mono text-xs text-teal">{String(i + 1).padStart(2, "0")}</span>
+              </div>
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {group.items.map((item) => (
-                  <li key={item} className="chip !text-xs">
+                  <li key={item} className="chip">
                     {item}
                   </li>
                 ))}

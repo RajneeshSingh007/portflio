@@ -2,81 +2,73 @@
 
 import { site } from "@/lib/content";
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 
 export function Contact() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="contact" className="relative overflow-hidden pb-12 pt-20 sm:pt-28">
-      <div className="shell relative z-10">
+    <section id="contact" className="relative pb-14 pt-24 sm:pt-32">
+      <div className="shell">
         <motion.div
-          className="manga-panel relative grid items-center gap-8 overflow-hidden bg-gradient-to-br from-white via-[#fff0f7] to-[#eaf2ff] p-8 sm:p-10 lg:grid-cols-[1fr_auto]"
+          className="relative overflow-hidden rounded-[1.5rem] border border-sky-200/80 bg-gradient-to-br from-[#f8fbff] via-[#eef4ff] to-[#f3f0ff] px-8 py-12 shadow-[0_24px_60px_rgba(7,16,31,0.08)] sm:px-12 sm:py-16"
           initial={reduce ? false : { opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ type: "spring", stiffness: 140, damping: 16 }}
+          transition={{ type: "spring", stiffness: 120, damping: 18 }}
         >
-          <div className="relative z-10 min-w-0">
-            <p className="text-sm font-bold text-sakura">Contact</p>
-            <h2 className="display mt-3 text-4xl font-black text-night sm:text-5xl">
-              Let&apos;s talk
+          <div className="absolute -left-16 top-0 h-56 w-56 rounded-full bg-sky-200/50 blur-3xl" />
+          <div className="absolute -bottom-20 right-0 h-64 w-64 rounded-full bg-indigo-200/40 blur-3xl" />
+          <div className="absolute right-10 top-10 h-24 w-24 rounded-full bg-teal/10 blur-2xl" />
+
+          <div className="relative z-10 max-w-2xl">
+            <p className="section-label !text-sky-700">Contact</p>
+            <h2 className="display mt-4 text-4xl font-bold text-ink sm:text-6xl">
+              Let&apos;s build the next release
             </h2>
-            <p className="mt-4 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg">
-              Open to senior mobile / React Native roles, architecture chats, or
-              a product that needs someone who&apos;s already shipped a few
-              times.
+            <p className="mt-5 text-base leading-relaxed text-ink-muted sm:text-lg">
+              Open to senior mobile / React Native roles, architecture discussions, or
+              products that need someone who&apos;s shipped production apps before.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <a
                 href={`mailto:${site.email}`}
-                className="focus-ring btn-anime btn-sakura break-all sm:break-normal"
+                className="focus-ring btn btn-primary break-all sm:break-normal"
               >
                 Email me
               </a>
-              <a href={site.phoneHref} className="focus-ring btn-anime btn-ice">
+              <a href={site.phoneHref} className="focus-ring btn btn-secondary">
                 {site.callLabel}
               </a>
             </div>
 
-            <p className="mt-3 text-sm text-ink/45">
+            <p className="mt-5 text-sm text-ink-muted">
               Or write directly:{" "}
               <a
                 href={`mailto:${site.email}`}
-                className="focus-ring font-semibold text-ink/70 underline decoration-sakura/40 underline-offset-2 hover:text-sakura"
+                className="focus-ring font-medium text-ink underline decoration-sky-300 underline-offset-2 hover:text-sky-700"
               >
                 {site.email}
               </a>
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-6">
+            <div className="mt-10 flex flex-wrap gap-8 border-t border-sky-200/80 pt-8">
               {site.socials.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="focus-ring font-bold text-ink/55 transition hover:text-sakura"
+                  className="focus-ring text-sm font-medium text-ink-muted transition hover:text-sky-700"
                 >
                   {social.label} →
                 </a>
               ))}
             </div>
           </div>
-
-          <div className="relative mx-auto h-[220px] w-[180px] shrink-0 sm:h-[260px] sm:w-[210px]">
-            <Image
-              src="/anime-character.png"
-              alt="Portfolio character waving hello"
-              width={210}
-              height={260}
-              className="h-full w-full object-contain object-bottom drop-shadow-lg"
-            />
-          </div>
         </motion.div>
 
-        <p className="mt-8 text-center text-sm text-ink/40">
+        <p className="mt-8 text-center text-sm text-ink-muted">
           © {new Date().getFullYear()} {site.name}
         </p>
       </div>

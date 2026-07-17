@@ -1,141 +1,106 @@
 "use client";
 
+import { PhoneMock } from "@/components/PhoneMock";
+import type { GitHubRepo } from "@/lib/github";
 import { site } from "@/lib/content";
 import { motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 
 const marquee = [
   "React Native",
   "TypeScript",
   "Android",
-  "React",
-  "Cursor",
+  "Kotlin",
   "Architecture",
-  "Product",
-  "AI tools",
+  "Performance",
+  "CI/CD",
+  "App Store",
 ];
 
-export function Hero() {
+type HeroProps = {
+  repos: GitHubRepo[];
+};
+
+export function Hero({ repos }: HeroProps) {
   const reduce = useReducedMotion();
 
   return (
-    <section id="top" className="relative overflow-hidden pb-4 pt-8">
-      <div className="shell relative z-10 grid min-h-[calc(100svh-6rem)] items-center gap-8 py-10 lg:grid-cols-12 lg:gap-6">
-        <div className="lg:col-span-6 xl:col-span-7">
+    <section id="top" className="relative overflow-hidden pb-2 pt-4 sm:pt-6">
+      <div className="shell relative z-10 grid items-center gap-8 py-8 sm:gap-10 sm:py-12 lg:min-h-[calc(100svh-5.5rem)] lg:grid-cols-12 lg:gap-8">
+        <div className="min-w-0 lg:col-span-7">
           <motion.p
-            className="inline-flex items-center gap-2 rounded-full border border-sakura/30 bg-white/80 px-4 py-1.5 text-sm font-bold text-ink/70"
-            initial={reduce ? false : { opacity: 0, y: 12, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ type: "spring", stiffness: 260, damping: 20 }}
+            className="section-label text-[0.62rem] sm:text-[0.7rem]"
+            initial={reduce ? false : { opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
           >
-            <span className="text-sakura">✦</span>
-            {site.role} · {site.location}
+            <span className="sm:hidden">{site.role}</span>
+            <span className="hidden sm:inline">
+              {site.role} · {site.location}
+            </span>
           </motion.p>
 
-          <h1 className="mt-6">
+          <h1 className="mt-3 sm:mt-5">
             <span className="sr-only">{site.name}</span>
             <motion.span
               aria-hidden
-              className="display block text-[clamp(2.8rem,9vw,5.8rem)] font-black text-night"
-              initial={reduce ? false : { opacity: 0, y: 40 }}
+              className="display block text-[clamp(2rem,9vw,6.2rem)] font-extrabold leading-[1.05] text-ink"
+              initial={reduce ? false : { opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.05 }}
+              transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.05 }}
             >
               Rajneesh
             </motion.span>
             <motion.span
               aria-hidden
-              className="display block text-[clamp(2.8rem,9vw,5.8rem)] font-black"
-              initial={reduce ? false : { opacity: 0, y: 40 }}
+              className="display mt-0.5 block text-[clamp(2rem,9vw,6.2rem)] font-extrabold leading-[1.05]"
+              initial={reduce ? false : { opacity: 0, y: 36 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 120, damping: 16, delay: 0.14 }}
+              transition={{ type: "spring", stiffness: 120, damping: 18, delay: 0.14 }}
             >
-              <span className="bg-gradient-to-r from-sakura via-[#ff6b9d] to-ice bg-clip-text text-transparent">
-                Kamlesh Singh
+              <span className="bg-gradient-to-r from-teal-deep via-teal to-teal-glow bg-clip-text text-transparent">
+                Singh
               </span>
             </motion.span>
           </h1>
 
-          <motion.div
-            className="speech mt-8 max-w-xl p-5 sm:p-6"
-            initial={reduce ? false : { opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.28, type: "spring", stiffness: 160, damping: 18 }}
+          <motion.p
+            className="mt-4 max-w-lg text-base leading-relaxed text-ink-muted sm:mt-7 sm:text-lg lg:text-xl"
+            initial={reduce ? false : { opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.22 }}
           >
-            <p className="text-lg font-medium leading-relaxed text-ink-soft sm:text-xl">
-              {site.headline}
-            </p>
-          </motion.div>
+            {site.headline}
+          </motion.p>
 
           <motion.div
-            className="mt-8 flex flex-wrap gap-3"
-            initial={reduce ? false : { opacity: 0, y: 16 }}
+            className="mt-6 flex flex-wrap gap-3 sm:mt-9"
+            initial={reduce ? false : { opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            transition={{ duration: 0.45, delay: 0.32 }}
           >
-            <a href="#work" className="focus-ring btn-anime btn-sakura">
-              See my work
-            </a>
-            <a href="#contact" className="focus-ring btn-anime btn-ghost-anime">
-              Say hi
+            <a href="#personal" className="focus-ring btn btn-primary">
+              View projects
             </a>
           </motion.div>
         </div>
 
         <motion.div
-          className="relative lg:col-span-6 xl:col-span-5"
-          initial={reduce ? false : { opacity: 0, scale: 0.9, rotate: -2 }}
-          animate={{ opacity: 1, scale: 1, rotate: 0 }}
-          transition={{ type: "spring", stiffness: 140, damping: 14, delay: 0.2 }}
+          className="relative flex w-full justify-center overflow-visible lg:col-span-5 lg:justify-end"
+          initial={reduce ? false : { opacity: 0, scale: 0.94, y: 24 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 110, damping: 16, delay: 0.18 }}
         >
-          <div className="manga-panel relative mx-auto max-w-md overflow-visible !pb-0">
-            <div className="absolute left-4 top-4 z-20 chip !bg-white/95 shadow-sm">
-              9+ yrs
-            </div>
-
-            <div className="relative px-4 pt-12 sm:px-6">
-              <div
-                className={`relative mx-auto h-[280px] w-full max-w-[280px] sm:h-[320px] sm:max-w-[300px] ${reduce ? "" : "character-float"}`}
-              >
-                <div className="absolute inset-x-8 bottom-2 h-10 rounded-[100%] bg-sakura/20 blur-xl" />
-                <Image
-                  src="/anime-character.png"
-                  alt="Anime-style character representing Rajneesh"
-                  width={300}
-                  height={320}
-                  priority
-                  className="relative z-10 mx-auto h-full w-auto object-contain object-bottom drop-shadow-[0_12px_24px_rgba(42,31,85,0.2)]"
-                />
-              </div>
-            </div>
-
-            <div className="border-t border-sakura/20 bg-white/70 px-4 py-3">
-              <div className="flex flex-wrap justify-center gap-2">
-                {["React Native", "TypeScript", "Android"].map((tag) => (
-                  <span key={tag} className="chip !text-xs">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <motion.div
-            className="speech absolute -bottom-1 left-0 z-30 hidden max-w-[190px] p-3 text-sm font-semibold sm:block"
-            initial={reduce ? false : { opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.7, type: "spring" }}
-          >
-            Let's build something good.
-          </motion.div>
+          <div className="pointer-events-none absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(186,230,253,0.55),transparent_65%)] blur-xl sm:h-72 sm:w-72" />
+          <PhoneMock repos={repos} />
         </motion.div>
       </div>
 
-      <div className="marquee-anime mt-10" aria-hidden>
-        <div className="marquee-anime-track">
+      <div className="marquee mt-4" aria-hidden>
+        <div className="marquee-track">
           {[...marquee, ...marquee].map((item, i) => (
             <span key={`${item}-${i}`}>
-              {item} <span className="text-sakura">✿</span>
+              {item}
+              <span className="mx-3 text-teal">◆</span>
             </span>
           ))}
         </div>

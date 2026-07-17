@@ -7,53 +7,88 @@ export function Experience() {
   const reduce = useReducedMotion();
 
   return (
-    <section id="experience" className="relative py-20 sm:py-28">
+    <section id="experience" className="relative py-24 sm:py-32">
       <div className="shell">
         <motion.div
           initial={reduce ? false : { opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <p className="text-sm font-bold text-sakura">Experience</p>
-          <h2 className="display mt-2 text-4xl font-black sm:text-5xl">
-            Where I&apos;ve been
+          <p className="section-label">Experience</p>
+          <h2 className="display mt-4 text-4xl font-bold text-ink sm:text-5xl">
+            Career timeline
           </h2>
-          <p className="mt-3 max-w-xl text-ink-soft">
-            From freelancing and a small studio to larger product teams — mostly
-            mobile, always shipping.
+          <p className="mt-4 max-w-xl text-ink-muted">
+            From freelancing and a small studio to larger product teams — mostly mobile,
+            always shipping.
           </p>
         </motion.div>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2">
+        <div className="relative mt-14 space-y-0 pl-8 sm:pl-10">
+          <div className="timeline-line" aria-hidden />
+
           {experience.map((job, i) => (
             <motion.article
               key={`${job.company}-${job.period}`}
-              className={`manga-panel p-6 ${
-                i === 0 ? "md:col-span-2 bg-gradient-to-br from-white to-[#ffe9f4]/50" : ""
-              }`}
-              initial={reduce ? false : { opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ type: "spring", stiffness: 160, damping: 18, delay: i * 0.03 }}
-              whileHover={reduce ? undefined : { y: -3 }}
+              className="relative pb-10 last:pb-0"
+              initial={reduce ? false : { opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.25 }}
+              transition={{ duration: 0.4, delay: i * 0.04 }}
             >
-              <div className="flex flex-wrap items-start justify-between gap-3">
-                <div>
-                  <h3 className="display text-2xl font-black sm:text-3xl">
-                    {job.company}
-                  </h3>
-                  <p className="mt-1 font-semibold text-ink-soft">{job.role}</p>
+              <span
+                className={`absolute -left-8 top-2 flex h-3 w-3 items-center justify-center rounded-full sm:-left-10 ${
+                  i === 0
+                    ? "bg-teal shadow-[0_0_0_6px_rgba(15,154,138,0.18)]"
+                    : "bg-line-strong"
+                }`}
+                aria-hidden
+              />
+
+              <div
+                className={`surface p-6 sm:p-7 ${
+                  i === 0 ? "ring-1 ring-teal/25" : ""
+                }`}
+              >
+                <div className="flex flex-wrap items-start justify-between gap-3">
+                  <div>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <h3 className="display text-2xl font-bold text-ink sm:text-3xl">
+                        {job.company}
+                      </h3>
+                      {i === 0 ? (
+                        <span className="rounded-full bg-teal/15 px-2.5 py-0.5 font-mono text-[0.6rem] font-medium tracking-wide text-teal">
+                          Current
+                        </span>
+                      ) : null}
+                    </div>
+                    <p className="mt-1 font-medium text-ink-muted">{job.role}</p>
+                    <p className="mt-1 text-sm text-ink-muted/80">{job.location}</p>
+                  </div>
+                  <span className="chip !text-xs">{job.period}</span>
                 </div>
-                <span className="chip !bg-ice/15 !text-xs">{job.period}</span>
+
+                <p className="mt-4 text-sm leading-relaxed text-ink-soft sm:text-base">
+                  {job.summary}
+                </p>
+
+                <ul className="mt-5 space-y-2.5 text-sm leading-relaxed text-ink-muted sm:text-base">
+                  {job.highlights.map((line) => (
+                    <li key={line} className="flex gap-3">
+                      <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-teal" />
+                      <span>{line}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-5 flex flex-wrap gap-1.5 border-t border-line pt-5">
+                  {job.tech.map((tag) => (
+                    <span key={tag} className="chip !text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
-              <ul className="mt-5 space-y-2 text-ink-soft">
-                {job.highlights.map((line) => (
-                  <li key={line} className="flex gap-2">
-                    <span className="text-sakura">•</span>
-                    <span>{line}</span>
-                  </li>
-                ))}
-              </ul>
             </motion.article>
           ))}
         </div>

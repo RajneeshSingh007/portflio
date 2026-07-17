@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, M_PLUS_Rounded_1c, Zen_Maru_Gothic } from "next/font/google";
+import { DM_Sans, IBM_Plex_Mono, Syne } from "next/font/google";
 import "./globals.css";
 
-const zen = Zen_Maru_Gothic({
-  variable: "--font-zen",
+const syne = Syne({
+  variable: "--font-syne",
   subsets: ["latin"],
-  weight: ["500", "700", "900"],
+  weight: ["500", "600", "700", "800"],
 });
 
-const mplus = M_PLUS_Rounded_1c({
-  variable: "--font-mplus",
+const dm = DM_Sans({
+  variable: "--font-dm",
   subsets: ["latin"],
-  weight: ["400", "500", "700", "800"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const plexMono = IBM_Plex_Mono({
@@ -21,9 +21,9 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Rajneesh Kamlesh Singh — Senior Software Engineer",
+  title: "Rajneesh Singh — Mobile Software Engineer",
   description:
-    "Senior Software Engineer — React Native, TypeScript, Android, and AI-assisted shipping.",
+    "Mobile Software Engineer specializing in React Native, TypeScript, and Android. 9+ years shipping production apps end to end.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
-  name: "Rajneesh Kamlesh Singh",
-  jobTitle: "Senior Software Engineer",
+  name: "Rajneesh Singh",
+  jobTitle: "Mobile Software Engineer",
   email: "mailto:manish.rajneesh@gmail.com",
   telephone: "+918169186245",
   sameAs: [
     "https://www.linkedin.com/in/rajneesh-s-6bb228120",
-    "https://github.com/rajneeshsingh007",
+    "https://github.com/RajneeshSingh007",
   ],
 };
 
@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${zen.variable} ${mplus.variable} ${plexMono.variable} h-full antialiased`}
+      className={`${syne.variable} ${dm.variable} ${plexMono.variable} h-full antialiased`}
     >
       <body className="min-h-full font-sans">
         <a href="#top" className="skip-link focus-ring">
